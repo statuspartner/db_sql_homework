@@ -1,0 +1,50 @@
+-- ДОМАШНЕЕ ЗАДАНИЕ, УРОК 3.
+USE lesson_3;
+SELECT * FROM staff;
+
+## Задание №1. Отсортируйте данные по полю заработная плата (salary) в порядке: убывания; возрастания.
+SELECT
+  salary
+FROM staff
+ORDER BY salary; -- в порядке возрастания
+
+SELECT
+  salary
+FROM staff
+ORDER BY salary DESC; -- в порядке убывания
+
+## Задание №2. Выведите 5 максимальных заработных плат (salary).
+SELECT DISTINCT	salary AS "TOP-5 salary"
+FROM staff
+ORDER BY salary DESC
+LIMIT 5;
+
+## Задание №3. Посчитайте суммарную зарплату (salary) по каждой специальности (роst).
+SELECT
+  post,
+  SUM(salary) AS sum_salary
+FROM staff
+GROUP BY post; -- группировка по должностям
+
+## Задание №4. Найдите кол-во сотрудников с специальностью (post) «Рабочий» в возрасте от 24 до 49 лет включительно.
+SELECT
+  post,
+  COUNT(*) AS `count`
+FROM staff
+WHERE post = "Рабочий" AND age >= 24 AND age <= 49;
+
+## Задание №5. Найдите количество специальностей.
+SELECT 
+  COUNT(DISTINCT post) AS "Posts_count" 
+FROM staff;
+
+## Задание №6. Выведите специальности, у которых средний возраст сотрудников меньше 30 лет включительно(??).
+
+SELECT
+  post,
+  AVG(age) AS average_age
+FROM staff
+GROUP BY post
+HAVING AVG(age) <= 30; -- Странная формулировка "меньше 30 лет включительно". Меньше 30 лет - это < 30, но по таким условиям нет результатов. 
+
+
